@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from datetime import datetime, time     # for IsPushedEvent
+from datetime import datetime     # for IsPushedEvent
+from colorama import Fore, Style
 
 from check_mallicious import IsPushedEvent, \
                              IsDeletedAfter10Min, \
@@ -9,9 +10,6 @@ CheckMaliciousEventTable = {
     "PushingCode" : IsPushedEvent,
     "HackerTeam" : IsAddedHackerTeam
 }
-
-
-
 
 class MaliciousEvents(ABC):
     def __init__(self, notify):
@@ -25,7 +23,6 @@ class MaliciousEvents(ABC):
     @abstractmethod
     def to_string(self):
         pass
-        
 
 class RepositoryDeletedEvent(MaliciousEvents):
     def __init__(self, notify, data):
@@ -39,7 +36,8 @@ class RepositoryDeletedEvent(MaliciousEvents):
 
 
     def to_string(self):
-        return "Malicious event of type: " + self.malicious_events_type \
+        return "Malicious event of type: " + Fore.RED + self.malicious_events_type \
+            + Fore.WHITE \
             +   " is detected ! \n" \
             + "The repository named: " + self.data["full_name"] \
             + "\ncreated at: " + self.data["created_at"] \
@@ -57,7 +55,8 @@ class PushingCode(MaliciousEvents):
 
 
     def to_string(self):
-        return "Malicious event of type: " + self.malicious_events_type \
+        return "Malicious event of type: " + Fore.RED + self.malicious_events_type \
+            + Fore.WHITE \
             +   " is detected ! \n" \
             + "The repository named: " + self.data["full_name"] \
             + "\npushed by \n\t" + self.data["pusher"]["name"] \
@@ -75,16 +74,12 @@ class HackerTeam(MaliciousEvents):
 
 
     def to_string(self):
-        return "Malicious event of type: \n\t" + self.malicious_events_type \
+        return "Malicious event of type: \n\t" + Fore.RED + self.malicious_events_type \
+            + Fore.WHITE \
             +   " is detected ! \n" \
             + "New team :\t" + self.data["team_name"] \
             + "\nwas added by \t" + self.data["sender"]
 
-# Example usage:
-def notify_print(string):
-    print("/!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\")
-    print(string)
-    print("/!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\")
 
 def create_repository_deleted_event(notify_function, data):
     return RepositoryDeletedEvent(notify_function, data)
@@ -98,7 +93,7 @@ def create_hacker_team_event(notify_function, data):
     return HackerTeam(notify_function, data)
 
 
-def create_malicious_event(event_type, notify_function, data):
+def event_factory(event_type, notify_function, data):
     event_creators = {
         "RepositoryDeletedEvent": create_repository_deleted_event,
         "PushingCode": create_pushing_code_event,
@@ -109,36 +104,4 @@ def create_malicious_event(event_type, notify_function, data):
         return creator_func(notify_function, data)
     else:
         raise ValueError(f"Invalid event_type: {event_type}")
-
-
-# dataDelete = { "repository": {
-#     "full_name": "mickaelbalensi/test",
-#     "created_at": "2022-06-18T14:13:19Z",
-#     "updated_at": "2022-06-18T15:03:32Z"
-#     }
-# }
-
-# dataPushed = { "repository": {
-#     "full_name": "mickaelbalensi/test",
-#     "pusher": {
-#         "name": "mickaelbalensi",
-#         "email": "mickael@test.com"
-#     },
-#     "pushed_at": 1655220084
-#     }
-# }
-
-# dataTeam = { 
-#     "sender": {
-#         "login": "mickaelbalensi",
-#         "type": "User"
-#         },
-#     "team": {
-#         "name": "HackerTeam"
-#     }
-# }
-
-
-# event = HackerTeam(notify_function, dataTeam)
-# event.Notify()
 
