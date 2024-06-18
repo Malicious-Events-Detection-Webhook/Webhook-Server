@@ -17,6 +17,7 @@ def handle_get():
 def handle_post():
     # Handle POST request
     print("got a POST request")
+    print("the request JSON is: ", request.json)
     data = {
         "message": "This is a POST response",
         "data": request.json
