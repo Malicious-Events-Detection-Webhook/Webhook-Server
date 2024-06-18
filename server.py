@@ -2,13 +2,15 @@ from flask import Flask, request, jsonify
 import json
 import pickle as pkl
 import os
+import time
 
 SAVED_DIR = "."
-HTTP_POST_REQUEST = "post-request.pkl"
+timestamp = int(time.time())
+HTTP_POST_REQUEST = f"post-request{timestamp}.pkl"
 os.makedirs(SAVED_DIR, exist_ok=True)
 
 def serialize(request):
-    serialized = pkl.dumps(request)
+    serialized = pkl.dumps(request.json)
     filename = f"{SAVED_DIR}/{HTTP_POST_REQUEST}"
 
     with open(filename, "wb") as f:
