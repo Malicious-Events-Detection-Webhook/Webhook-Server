@@ -19,7 +19,7 @@ def handle_post():
     # Handle POST request
     print("got a POST request")
     pretty_json = json.loads(request.data)
-    print("action is: ", pretty_json["action"])
+    print("action is: ", request.json["action"])
     print("the request JSON is: ",json.dumps(pretty_json, indent=2))
 
     data = {
