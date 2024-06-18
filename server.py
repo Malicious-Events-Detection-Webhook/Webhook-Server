@@ -8,7 +8,7 @@ HTTP_POST_REQUEST = "post-request.pkl"
 os.makedirs(SAVED_DIR, exist_ok=True)
 
 def serialize(request):
-    serialized = pkl.dumps(request.json)
+    serialized = pkl.dumps(request)
     filename = f"{SAVED_DIR}/{HTTP_POST_REQUEST}"
 
     with open(filename, "wb") as f:
