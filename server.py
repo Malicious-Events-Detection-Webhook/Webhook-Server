@@ -4,21 +4,31 @@ import pickle as pkl
 import os
 import time
 
-SAVED_DIR = "."
+from events import MaliciousEvents,\
+                   RepositoryDeletedEvent, \
+                   PushingCode, \
+                   HackerTeam, \
+                   CheckMaliciousEventTable, \
+                   create_malicious_event
+
+
+
+""" SAVED_DIR = "."
 timestamp = int(time.time())
 HTTP_POST_REQUEST = f"post-request{timestamp}.pkl"
-os.makedirs(SAVED_DIR, exist_ok=True)
+os.makedirs(SAVED_DIR, exist_ok=True) """
 
-def serialize(request):
-    serialized = pkl.dumps(request.json)
-    filename = f"{SAVED_DIR}/{HTTP_POST_REQUEST}"
 
-    with open(filename, "wb") as f:
-        f.write(serialized)
+# def serialize(request):
+#     serialized = pkl.dumps(request.json)
+#     filename = f"{SAVED_DIR}/{HTTP_POST_REQUEST}"
+
+#     with open(filename, "wb") as f:
+#         f.write(serialized)
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET'])
+""" @app.route('/', methods=['GET'])
 def handle_get():
     # Handle GET request
     print("got a GET request")
@@ -27,21 +37,24 @@ def handle_get():
         "message": "This is a GET response",
         "params": request.args
     }
-    return jsonify(data), 200
+    return jsonify(data), 200 """
 
 @app.route('/', methods=['POST'])
 def handle_post():
-    # Handle POST request
     print("got a POST request")
     
-    serialize(request)
+    # serialize(request)
+    for eventType, isMalicious in CheckMaliciousEventTable:
+        if isMalicious(request.json):
+            event = create_malicious_event(eventType, request.json)
+            event.notify()
 
-    pretty_json = json.loads(request.data)
-    print("action is: ", request.json["action"])
-    print("the request JSON is: ",json.dumps(pretty_json, indent=2))
+    # pretty_json = json.loads(request.data)
+    # print("action is: ", request.json["action"])
+    # print("the request JSON is: ",json.dumps(pretty_json, indent=2))
     data = {
         "message": "This is a POST response",
-        "data": request.json
+        # "data": request.json
     }
     return jsonify(data), 200
 
