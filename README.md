@@ -62,6 +62,7 @@ git remote add origin https://github.com/AWS-Amazon-AZ/ML-models.git
 git push -u origin master
 </code></pre>
 <p>Ensure the push occurs between 14:00 and 16:00 to trigger the detection.</p>
+<img src="output push code btw 14h and 16h.png" alt="Delete repository">
 
 <h3>2. Creating a Team with the Prefix "hacker"</h3>
 <p>To test for creating a team with the prefix "hacker", manually add a team on GitHub:</p>
@@ -70,6 +71,9 @@ git push -u origin master
     <li>Go to <strong>Settings</strong> &gt; <strong>Manage access</strong> &gt; <strong>Teams</strong>.</li>
     <li>Create a new team with a name starting with "hacker", such as "hacker_team".</li>
 </ol>
+<p>Here is an image showing output of suspect behavior after Creating a Team with the name "hackerttt":</p>
+<img src="output new hacker team added.png" alt="Delete repository">
+
 
 <h3>3. Creating a Repository and Deleting It in Less Than 10 Minutes</h3>
 <p>To simulate creating and deleting a repository quickly, manually perform the following steps on GitHub:</p>
@@ -78,6 +82,8 @@ git push -u origin master
     <li>Wait for less than 10 minutes.</li>
     <li>Delete the repository.</li>
 </ol>
+<p>Here is an image showing output of suspect behavior after Creating a Repository and Deleting It in Less Than 10 Minutes:</p>
+<img src="output delet repository less than 10 minutes.png" alt="Delete repository">
 
 <p>These actions will send the appropriate events to the Flask server, simulating the detection of suspicious behaviors and triggering the corresponding notifications.</p>
 
