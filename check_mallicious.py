@@ -13,7 +13,7 @@ def IsPushedEvent(json_data):
     try:
         
         timestamp_pushed_at = json_data["repository"]["pushed_at"]
-        date = datetime.fromtimestamp(timestamp_pushed_at)
+        date = datetime.fromtimestamp(timestamp_pushed_at) 
         start_time = time(00, 0)  
         end_time = time(16, 0)
         return (start_time <= date.time()<= end_time)
