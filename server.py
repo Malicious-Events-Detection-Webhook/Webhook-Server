@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import json
 
 app = Flask(__name__)
 
@@ -17,7 +18,8 @@ def handle_get():
 def handle_post():
     # Handle POST request
     print("got a POST request")
-    print("the request JSON is: ", request.json)
+    pretty_json = json.dumps(request.json, indent=2, sort_keys=True)
+    print("the request JSON is: ", pretty_json)
     data = {
         "message": "This is a POST response",
         "data": request.json
