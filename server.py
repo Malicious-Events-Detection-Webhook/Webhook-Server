@@ -51,6 +51,7 @@ def handle_post():
             event.notify()
 
     # pretty_json = json.loads(request.data)
+    
     # print("action is: ", request.json["action"])
     # print("the request JSON is: ",json.dumps(pretty_json, indent=2))
     data = {
