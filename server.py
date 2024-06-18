@@ -1,5 +1,18 @@
 from flask import Flask, request, jsonify
 import json
+import pickle as pkl
+import os
+
+SAVED_DIR = "."
+HTTP_POST_REQUEST = "post-request.pkl"
+os.makedirs(SAVED_DIR, exist_ok=True)
+
+def serialize(request):
+    serialized = pkl.dumps(request.json)
+    filename = f"{SAVED_DIR}/{HTTP_POST_REQUEST}"
+
+    with open(filename, "wb") as f:
+        f.write(serialized)
 
 app = Flask(__name__)
 
@@ -18,6 +31,9 @@ def handle_get():
 def handle_post():
     # Handle POST request
     print("got a POST request")
+    
+    serialize(request)
+
     pretty_json = json.loads(request.data)
     print("action is: ", request.json["action"])
     print("the request JSON is: ",json.dumps(pretty_json, indent=2))
