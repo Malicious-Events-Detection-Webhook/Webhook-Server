@@ -48,10 +48,10 @@ def handle_post():
     for eventType, isMalicious in CheckMaliciousEventTable.items():
         if isMalicious(request.json):
             event = create_malicious_event(eventType, notify_print, request.json)
-            event.notify()
+            event.Notify()
 
     # pretty_json = json.loads(request.data)
-    
+
     # print("action is: ", request.json["action"])
     # print("the request JSON is: ",json.dumps(pretty_json, indent=2))
     data = {

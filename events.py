@@ -11,29 +11,6 @@ CheckMaliciousEventTable = {
 }
 
 
-def create_repository_deleted_event(notify_function, data):
-    return RepositoryDeletedEvent(notify_function, data)
-
-
-def create_pushing_code_event(notify_function, data):
-    return PushingCode(notify_function, data)
-
-
-def create_hacker_team_event(notify_function, data):
-    return HackerTeam(notify_function, data)
-
-
-def create_malicious_event(event_type, notify_function, data):
-    event_creators = {
-        "RepositoryDeletedEvent": create_repository_deleted_event,
-        "PushingCode": create_pushing_code_event,
-        "HackerTeam": create_hacker_team_event,
-    }
-    creator_func = event_creators.get(event_type)
-    if creator_func:
-        return creator_func(notify_function, data)
-    else:
-        raise ValueError(f"Invalid event_type: {event_type}")
 
 
 class MaliciousEvents(ABC):
@@ -108,6 +85,30 @@ def notify_print(string):
     print("/!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\")
     print(string)
     print("/!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\")
+
+def create_repository_deleted_event(notify_function, data):
+    return RepositoryDeletedEvent(notify_function, data)
+
+
+def create_pushing_code_event(notify_function, data):
+    return PushingCode(notify_function, data)
+
+
+def create_hacker_team_event(notify_function, data):
+    return HackerTeam(notify_function, data)
+
+
+def create_malicious_event(event_type, notify_function, data):
+    event_creators = {
+        "RepositoryDeletedEvent": create_repository_deleted_event,
+        "PushingCode": create_pushing_code_event,
+        "HackerTeam": create_hacker_team_event,
+    }
+    creator_func = event_creators.get(event_type)
+    if creator_func:
+        return creator_func(notify_function, data)
+    else:
+        raise ValueError(f"Invalid event_type: {event_type}")
 
 
 # dataDelete = { "repository": {
