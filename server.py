@@ -44,7 +44,7 @@ def handle_post():
     print("got a POST request")
     
     # serialize(request)
-    for eventType, isMalicious in CheckMaliciousEventTable:
+    for eventType, isMalicious in CheckMaliciousEventTable.items():
         if isMalicious(request.json):
             event = create_malicious_event(eventType, request.json)
             event.notify()

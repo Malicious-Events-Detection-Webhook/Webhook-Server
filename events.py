@@ -110,34 +110,34 @@ def notify_function(string):
     print("/!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\")
 
 
-dataDelete = { "repository": {
-    "full_name": "mickaelbalensi/test",
-    "created_at": "2022-06-18T14:13:19Z",
-    "updated_at": "2022-06-18T15:03:32Z"
-    }
-}
+# dataDelete = { "repository": {
+#     "full_name": "mickaelbalensi/test",
+#     "created_at": "2022-06-18T14:13:19Z",
+#     "updated_at": "2022-06-18T15:03:32Z"
+#     }
+# }
 
-dataPushed = { "repository": {
-    "full_name": "mickaelbalensi/test",
-    "pusher": {
-        "name": "mickaelbalensi",
-        "email": "mickael@test.com"
-    },
-    "pushed_at": 1655220084
-    }
-}
+# dataPushed = { "repository": {
+#     "full_name": "mickaelbalensi/test",
+#     "pusher": {
+#         "name": "mickaelbalensi",
+#         "email": "mickael@test.com"
+#     },
+#     "pushed_at": 1655220084
+#     }
+# }
 
-dataTeam = { 
-    "sender": {
-        "login": "mickaelbalensi",
-        "type": "User"
-        },
-    "team": {
-        "name": "HackerTeam"
-    }
-}
+# dataTeam = { 
+#     "sender": {
+#         "login": "mickaelbalensi",
+#         "type": "User"
+#         },
+#     "team": {
+#         "name": "HackerTeam"
+#     }
+# }
 
 
-event = HackerTeam(notify_function, dataTeam)
-event.Notify()
+# event = HackerTeam(notify_function, dataTeam)
+# event.Notify()
 
