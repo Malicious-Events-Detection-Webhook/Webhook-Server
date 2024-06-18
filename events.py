@@ -74,7 +74,7 @@ class PushingCode(MaliciousEvents):
         self.malicious_events_type = "\'Code pushed between 14:00 and 16:00\'"
         self.data = {
             "full_name" : data["repository"]["full_name"],
-            "pusher" : data["repository"]["pusher"],
+            "pusher" : data["pusher"],
             "pushed_at" : datetime.fromtimestamp(data["repository"]["pushed_at"])
         }
 
