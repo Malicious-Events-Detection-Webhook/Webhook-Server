@@ -18,8 +18,8 @@ def handle_get():
 def handle_post():
     # Handle POST request
     print("got a POST request")
-    pretty_json = json.dumps(request.json, indent=2, sort_keys=True)
-    print("the request JSON is: ", pretty_json)
+    pretty_json = json.loads(request.data)
+    print("the request JSON is: ",json.dump(pretty_json, indent=2))
     data = {
         "message": "This is a POST response",
         "data": request.json
