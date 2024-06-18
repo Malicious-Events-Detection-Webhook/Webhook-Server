@@ -104,7 +104,7 @@ class HackerTeam(MaliciousEvents):
             + "\nwas added by \t" + self.data["sender"]
 
 # Example usage:
-def notify_function(string):
+def notify_print(string):
     print("/!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\")
     print(string)
     print("/!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\ /!\\")

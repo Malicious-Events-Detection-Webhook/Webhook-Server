@@ -9,7 +9,8 @@ from events import MaliciousEvents,\
                    PushingCode, \
                    HackerTeam, \
                    CheckMaliciousEventTable, \
-                   create_malicious_event
+                   create_malicious_event, \
+                   notify_print
 
 
 
@@ -46,7 +47,7 @@ def handle_post():
     # serialize(request)
     for eventType, isMalicious in CheckMaliciousEventTable.items():
         if isMalicious(request.json):
-            event = create_malicious_event(eventType, request.json)
+            event = create_malicious_event(eventType, notify_print, request.json)
             event.notify()
 
     # pretty_json = json.loads(request.data)
